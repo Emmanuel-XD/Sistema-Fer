@@ -34,7 +34,7 @@ $varsesion = $_SESSION['usuario'];
 				 <ul class="navbar-nav ms-auto">
 
 		 <li class="nav-item"><a class="nav-link" href="../views/departamentos.php">Departamentos </a></li>
-
+		 <li class="nav-item"><a class="nav-link"href="../views/compras.php">Compras </a></li>
 		 <li class="nav-item"><a class="nav-link"href="../views/articulos.php">Articulos </a></li>
 		 <li class="nav-item"><a class="nav-link"href="../views/acceso.php" >Usuarios </a><li>
 		 <li class="nav-item"><a class="nav-link"href="../views/contacto.php" >Soporte </a><li>
