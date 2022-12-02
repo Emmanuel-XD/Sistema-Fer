@@ -1,0 +1,9 @@
+  #m {  color: #FF0000;  }
+  #b {  color: #FFA500;  }
+  a { text-decoration: none; 
+	  } 
+	table.dataTable thead th, table.dataTable tfoot th {
+        font-weight: bold;
+        color: white;
+    }
+    
