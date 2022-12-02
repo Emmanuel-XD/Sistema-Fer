@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2022 a las 17:24:29
+-- Tiempo de generación: 02-12-2022 a las 08:13:34
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -36,6 +36,22 @@ CREATE TABLE `articulos` (
   `precio` float NOT NULL,
   `inventario` varchar(150) NOT NULL,
   `proveedor` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compras`
+--
+
+CREATE TABLE `compras` (
+  `id` int(11) NOT NULL,
+  `codigo` varchar(150) NOT NULL,
+  `cantidad` varchar(150) NOT NULL,
+  `unidad` varchar(150) NOT NULL,
+  `preciounit` varchar(150) NOT NULL,
+  `total` varchar(150) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -115,6 +131,12 @@ ALTER TABLE `articulos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
@@ -141,6 +163,12 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `articulos`
 --
 ALTER TABLE `articulos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `compras`
+--
+ALTER TABLE `compras`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
