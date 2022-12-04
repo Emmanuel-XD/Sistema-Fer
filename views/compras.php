@@ -23,11 +23,10 @@ $varsesion = $_SESSION['usuario'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../DataTables/css/dataTables.bootstrap4.min.css">
-      <link rel="stylesheet" type="text/css" href="../css/prueba.css">
+
+
     <script src="../js/jquery.min.js"></script>
 
-    <script src="../js/resp/bootstrap.min.js"></script>
   
     <title></title>
 </head>
@@ -45,46 +44,52 @@ $varsesion = $_SESSION['usuario'];
    <input type="text" class="">
     </div>
     <br>
-    <div style="">
+
+    <div >
         <p>Articulos</p>
     <label for="">Codigo</label>
-   <input type="text" class="">   
-   <label for="">Descripcion</label> 
-   <input type="text" class="">  
-   <label for="">Cantidad</label> 
-   <input type="text" class="">  
-   <label for="">Unidad</label> 
-   <input type="text" class="">  
-   </div>
-   <br>
-   <div>
+    <input type="text" class="searchbox" name="codigo" id="codigo">
+        <input type="submit" class="btn btn-outline-secondary" name="buscar" id="buscar" value="BUSCAR">
+        <form action="POST" id="formulario">
 
-   <label for="">Precio Unitario</label> 
-   <input type="text" class=""> 
-   <label for="">Total</label> 
-   <input type="text" class="">  
+</form>
+
+ 
+   </div>
    
-   <button id="agregar" name="agregar" class="btn btn-primary">Agregar</button>
-    </div>
+   <script>
+        $(document).ready(function(){
+            $('#buscar').click(function(e){
+                e.preventDefault();
+
+                var codigo = $('input[name=codigo]').val();
+                $.ajax({
+                    type: "POST",
+                    url: "recibe.php",
+                    data:{
+                        "buscador": 1,
+                        "codigo": codigo,
+
+                    },
+                    dataType:"text",
+                    success: function(response){
+                        $('#formulario').html(response); 
+                    }
+                });
+            });
+          
+        });
+    </script>
+
 		<br>
-		<style>
-  
-  #m {  color: #FF0000;  }
-  #b {  color: #FFA500;  }
-  a { text-decoration: none; 
-	  } 
-	table.dataTable thead th, table.dataTable tfoot th {
-        font-weight: bold;
-        color: white;
-    }
-  </style>
+		
         
-        <table class="table table-striped"  id= "table_id">
+        <table class="table table-striped"  >
 
                    
                          <thead>    
-                         <tr class="bg-dark">
-                        <th>Id</th>
+                         <tr class="bg-dark" style="color: white;">
+                        <th >Id</th>
                         <th>Codigo</th>
                         <th>Cantidad</th>
                         <th>Unidad</th>
@@ -116,47 +121,7 @@ $varsesion = $_SESSION['usuario'];
   <input type="text">
   <label for="">Total Requesiciones</label>
   <input type="text">
-   <script>
-  $('.btn-del').on('click', function(e){
-e.preventDefault();
-const href = $(this).attr('href')
 
-Swal.fire({
-  title: 'Estas seguro de eliminar este usuario?',
-  text: "¡No podrás revertir esto!!",
-  icon: 'warning',
-  showCancelButton: true,
-  confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
-  confirmButtonText: 'Si, eliminar!', 
-  cancelButtonText: 'Cancelar!', 
-}).then((result)=>{
-    if(result.value){
-        if (result.isConfirmed) {
-    Swal.fire(
-      'Eliminado!',
-      'El usuario fue eliminado.',
-      'success'
-    )
-  }
-
-        document.location.href= href;
-    }   
-})
-
-    })
-
-
-</script>
-<script src="../package/dist/sweetalert2.all.js"></script>
-<script src="../package/dist/sweetalert2.all.min.js"></script>
-<script src="../package/jquery-3.6.0.min.js"></script>
-
-  <script type="text/javascript" src="../DataTables/js/datatables.min.js"></script>
-  <script type="text/javascript" src="../DataTables/js/jquery.dataTables.min.js"></script>
-  <script src="../DataTables/js/dataTables.bootstrap4.min.js"></script>
-<script src="../js/user.js"></script>
   
-
 
 </html>
