@@ -44,42 +44,118 @@ $varsesion = $_SESSION['usuario'];
    <input type="text" class="">
     </div>
     <br>
-
-    <div >
-        <p>Articulos</p>
-    <label for="">Codigo</label>
-    <input type="text" class="searchbox" name="codigo" id="codigo">
-        <input type="submit" class="btn btn-outline-secondary" name="buscar" id="buscar" value="BUSCAR">
-        <form action="POST" id="formulario">
-
-</form>
-
  
+    <div class="modal-buy" id="test">
+        <div class="modal-content-buy">
+            <div class="product-form-buy">
+            <form action="POST" id="formulario">
+                <p>Articulos</p>
+                <label for="">Codigo</label>
+                <input type="text" class="searchbox" name="codigo" id="codigo">
+                <input type="submit" class="btn btn-outline-secondary" name="buscar" id="buscar" value="BUSCAR">
+                </form>
+            </div>
+        </div>
+   </div>
+   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+  Imprimir esta requisicion...
+</button>
+   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <div class=" modal-body">
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
    </div>
    
+   <!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+ Buscar Requisicion...
+</button>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
    <script>
         $(document).ready(function(){
             $('#buscar').click(function(e){
                 e.preventDefault();
+                var code = document.getElementById("codigo").value
+                var formularioDatos = new FormData()
+                formularioDatos.append('buscador', 'buscador')
+                formularioDatos.append('codigo',  code)
 
-                var codigo = $('input[name=codigo]').val();
-                $.ajax({
-                    type: "POST",
-                    url: "recibe.php",
-                    data:{
-                        "buscador": 1,
-                        "codigo": codigo,
+                fetch('recibe.php', {
+                    method: 'POST',
+                    body: formularioDatos
+                }).then((res) => res.json()).then((Response) => {
+                    let html = ``
+                    Response.map(function(a){
+                        html += `
+                                            <tr> 
+                        <td>${a.id}</td>
+                        <td>${a.codigo}</td>
+                        <td>000</td>
+                        <td>000</td>
+                        <td>${a.unidad}</td>
+                        <td>${a.precio}</td>
+                        <td>${a.unidad + 3}</td>
+                        </tr>
+                                            
+                                            
+                        `;
 
-                    },
-                    dataType:"text",
-                    success: function(response){
-                        $('#formulario').html(response); 
-                    }
-                });
+                    })
+                    const dtable = document.getElementById("formtable")
+                    dtable.innerHTML += html;
+                })
             });
           
         });
-    </script>
+        
+     /*    let modalBtns = [...document.querySelectorAll(".button")];
+        modalBtns.forEach(function (btn) {
+            btn.onclick = function () {
+            let modal = btn.getAttribute("data-modal");
+            document.getElementById(modal).style.display = "block";
+            };
+        });
+        let closeBtns = [...document.querySelectorAll(".close")];
+      closeBtns.forEach(function (btn) {
+        btn.onclick = function () {
+          let modal = btn.closest(".modal-buy");
+          modal.style.display = "none";
+        };
+      }); */
+      </script>
 
 		<br>
 		
@@ -98,7 +174,9 @@ $varsesion = $_SESSION['usuario'];
          
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="formtable">
+
+                        </tbody>
 
 			
 
@@ -122,6 +200,9 @@ $varsesion = $_SESSION['usuario'];
   <label for="">Total Requesiciones</label>
   <input type="text">
 
-  
+
+<script src="../js/bootstrap.min.js"></script>
+<!-- <script src="../js/jquery.min.js"></script> -->
+
 
 </html>

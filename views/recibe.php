@@ -8,37 +8,12 @@ if(isset($_POST['buscador']))
 
 	$consulta = "SELECT * FROM articulos WHERE codigo = '$codigo'"; 
 	$resultado = mysqli_query($conexion, $consulta);
-
-	if($resultado){
-
-		while ($fila = mysqli_fetch_array($resultado))
-		{
-			?>
-			<br>
-            <label for="">codigo</label> 
-			<input type="hidden" class="text" name="id" id="id" value="<?php echo $fila['codigo'];?>">
-			
-            <label for="">descripcion</label> 
-				<input type="text" class="text" readonly name="descripcion" id="descripcion" value="<?php echo $fila['descripcion'];?>">
-
-                <label for="">Cantidad</label> 
-				<input type="text" class="text" name="cantidad" id="cantidad" >
-			
-            <label for="">Unidad</label> 
-				<input type="text" class="text" readonly  name="unidad" id="unidad" value="<?php echo $fila['unidad'];?>">
-			
-		
-            <label for="">PrecioUnit</label> 
-				<input type="text" class="text" readonly name="precio" id="precio" value="<?php echo $fila['precio'];?>">
-		
-                
-                <label for="">Total</label> 
-				<input type="text" class="text" readonly name="total" id="total" >
-                <button id="agregar" name="agregar" class="btn btn-primary">Agregar</button>
-
-			<?php
-
+	$map_result = mysqli_num_rows($resultado);
+	if($map_result){
+		while ($dato = mysqli_fetch_assoc($resultado)){
+			$datos[] = $dato;
 		}
+		echo json_encode($datos);
 	} else{
         echo "<script language='JavaScript'>
         alert('No existe ese codigo en la db');
