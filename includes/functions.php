@@ -17,6 +17,9 @@ if (isset($_POST['accion'])){
     
             case 'editar_dep';
             editar_dep();
+
+            case 'editar_ceco';
+            editar_ceco();
     
             break;
 
@@ -90,6 +93,28 @@ function editar_dep() {
          echo "<script language='JavaScript'>
          alert('Uy no! ya valio hablale al ing :v');
          location.assign('../views/departamentos.php');
+         </script>";
+}
+
+}
+
+function editar_ceco() {
+    require_once ("db.php");
+    extract($_POST);
+    $consulta="UPDATE ceco SET  descripcion='$descripcion', 
+    estado='$estado' WHERE id = '$id' ";
+    $resultado=mysqli_query($conexion, $consulta);
+
+   if($resultado){
+        echo "
+        <script language='JavaScript'>
+        alert('El registro fue guardado correctamente');
+        location.assign('../views/ceco.php');
+        </script>";
+   } else{
+         echo "<script language='JavaScript'>
+         alert('Uy no! ya valio hablale al ing :v');
+         location.assign('../views/ceco.php');
          </script>";
 }
 
