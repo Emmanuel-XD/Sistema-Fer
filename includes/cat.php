@@ -64,7 +64,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="desc">MontoExtra</label><br>
-                                <input type="text" name="extra" id="extra" class="form-control" required>
+                                <input type="text" name="extra" id="extra" class="form-control" value="0"  >
                             </div>
 
 
@@ -95,6 +95,27 @@
 
 <script src="../package/dist/sweetalert2.all.js"></script>
 <script src="../package/dist/sweetalert2.all.min.js"></script>
+
+<script>
+let val1 = document.getElementById("monto")
+let val2 = document.getElementById("porcentaje")
+
+        
+document.getElementById("porcentaje").addEventListener("input", () => {
+            document.getElementById("extra").value =  val1.value * val2.value / 100;
+
+            console.log(`es : ${document.getElementById("extra").value}`)
+        })
+
+        var cambio = document.getElementById('porcentaje');
+
+function comprueba(valor){
+  if(valor.value < 0){
+    valor.value = 1;
+  }
+}
+</script>
+
 
 <script type="text/javascript">
 	$(function(){
