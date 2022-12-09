@@ -34,13 +34,13 @@ $varsesion = $_SESSION['usuario'];
 
 <div class="container is-fluid">
 <div class="col-xs-12">
-		<h1>Centro de Costos</h1>
+		<h1>Revision de Catalogo</h1>
     <br>
 		<div>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ceco">
-				<span class="glyphicon glyphicon-plus"></span> Agregar CeCo </a></button>
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#cat">
+				<span class="glyphicon glyphicon-plus"></span> Agregar</a></button>
     
-                <a href="catalogo.php" class="btn btn-outline-secondary">Ver Catalogo</a>
+             
     </div>
 		<br>
 		<style>
@@ -61,10 +61,12 @@ $varsesion = $_SESSION['usuario'];
                          <thead>    
                          <tr class="bg-dark">
                         <th>Id</th>
-                        <th>Descripcion</th>
-                        <th>Estado</th>
                         <th>Fecha</th>
-                        <th>Acciones</th>
+                        <th>CeCo</th>
+                        <th>Monto</th>
+                        <th>Porcentaje</th>
+                        <th>MontoExtra</th>
+                      
          
                         </tr>
                         </thead>
@@ -73,22 +75,18 @@ $varsesion = $_SESSION['usuario'];
 				<?php
 
 require_once ("../includes/db.php");             
-$result=mysqli_query($conexion,"SELECT * FROM ceco");
+$result=mysqli_query($conexion,"SELECT * FROM catalogo");
 while ($fila = mysqli_fetch_assoc($result)):
     
 ?>
 <tr>
 <td><?php echo $fila['id']; ?></td>
-<td><?php echo $fila['descripcion']; ?></td>
-<td><?php echo $fila['estado']; ?></td>
 <td><?php echo $fila['fecha']; ?></td>
+<td><?php echo $fila['ceco']; ?></td>
+<td><?php echo $fila['monto']; ?></td>
+<td><?php echo $fila['porcentaje']; ?></td>
+<td><?php echo $fila['extra']; ?></td>
 
-<td>
-<a class="btn btn-warning" href="../includes/editar_ceco.php?id=<?php echo $fila['id']?> ">
-editar</a>
-<a href="../includes/eliminar_ceco.php?id=<?php echo $fila['id']?> " class="btn btn-danger btn-del" >
-eliminar</a></button>
-</td>
 </tr>
 
 
@@ -143,5 +141,5 @@ Swal.fire({
 <script src="../js/user.js"></script>
   
 
-  <?php include("../includes/ceco.php"); ?>
+  <?php include("../includes/cat.php"); ?>
 </html>
