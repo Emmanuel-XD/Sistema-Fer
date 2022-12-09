@@ -9,9 +9,9 @@
 
 require_once ("db.php");
 if(isset($_POST)){
-  if (strlen($_POST['nombre']) >= 1 && strlen($_POST['descripcion']) >= 1 && strlen($_POST['estado']) >= 1) {
+  if (strlen($_POST['ceco']) >= 1 && strlen($_POST['descripcion']) >= 1 && strlen($_POST['estado']) >= 1) {
        
-        $nombre = trim($_POST['nombre']);
+        $nombre = trim($_POST['ceco']);
         $descripcion = trim($_POST['descripcion']);
         $estado = trim($_POST['estado']);
 

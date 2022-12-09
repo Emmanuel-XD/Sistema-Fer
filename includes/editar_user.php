@@ -65,11 +65,25 @@ $usuario = mysqli_fetch_assoc($resultado);
                             </div>
                             <div class="form-group">
                                   <label for="departamento" class="form-label">Departamento:</label>
-                                  <select name="edepartamento" id="departamento" class="form-control" required >
-                                  <option <?php echo $usuario ['departamento']==='Sistemas' ? "selected='selected' ": "" ?> value="Sistemas">Sistemas</option>
-                                  <option <?php echo $usuario ['departamento']==='Empleado' ? "selected='selected' ": "" ?> value="Empleado">Empleado</option>
-                                 
-                                  </select>
+                                  <select class="form-control" id="departamento" name="departamento" >
+                                    <!-- Codigo php para que no se guarde el valor html que tenemos puesto 
+                                    y que nos regrese el de la db, lo mismo pasa con los demas de esta seccion-->
+                                <option <?php echo $usuario ['departamento']==='departamento' ? "selected='selected' ": "" ?> 
+                                value="<?php echo $usuario ['departamento']; ?>"><?php echo $usuario ['departamento']; ?> </option>
+                                <?php
+
+                                include ("db.php");
+                                //Codigo para mostrar categorias desde otra tabla
+                                $sql="SELECT * FROM  departamentos ";
+                                $resultado=mysqli_query($conexion, $sql);
+                                while($consulta=mysqli_fetch_array($resultado)){
+                                    echo '<option value="'.$consulta['descripcion'].'">'.$consulta['descripcion'].'</option>';
+                                }
+
+                                ?>
+
+				
+								</select>
                             </div>
                             
                                 <div class="form-group">

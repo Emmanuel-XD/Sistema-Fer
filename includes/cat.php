@@ -16,11 +16,11 @@
 </head>
 
 <body id="page-top">
-    <div class="modal fade" id="dep" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
-                    <h3 class="modal-title" id="exampleModalLabel">Nuevo Departamento</h3>
+                    <h3 class="modal-title" id="exampleModalLabel">Nuevo catalogo</h3>
                        <button type="button" class="btn btn-primary" data-dismiss="modal">
 					<i class="fa fa-times" aria-hidden="true"></i></button>
 
@@ -28,8 +28,13 @@
                 <div class="modal-body">
 
 <form  action="artnew.php" method="POST">
-                            
-<div class="form-group">
+                            <div class="form-group">
+                            <label for="" class="form-label">Fecha</label>
+                            <input type="date"  id="fecha" name="fecha" class="form-control" required>
+                            </div>
+
+
+                            <div class="form-group">
                             <label for="" class="form-label">CeCo*</label>
                             <select name="ceco" id="ceco" required="true" class="form-control">
 							  <option value="0">--Selecciona una opcion--</option>
@@ -50,20 +55,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="desc">Descripcion:</label><br>
-                                <input type="text" name="descripcion" id="descripcion" class="form-control" required>
+                                <label for="desc">Monto</label><br>
+                                <input type="text" name="monto" id="monto" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="desc">Porcentaje</label><br>
+                                <input type="text" name="porcentaje" id="porcentaje" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="desc">MontoExtra</label><br>
+                                <input type="text" name="extra" id="extra" class="form-control" required>
                             </div>
 
-                            
-      
-                            <div class="form-group">
-                                  <label for="dep" class="form-label">Estado:</label>
-                                  <select name="estado" id="estado" class="form-control" required>
-                                  <option value="">--Selecciona una opcion--</option>
-                                  <option value="1">Activo</option>
-                                  <option value="2">Inactivo</option>
-                               </select>
-                            </div>
+
+
                            
                         
                       <br>
@@ -72,7 +77,7 @@
                                     
                                <input type="submit" value="Guardar" id="register" class="btn btn-success" 
                                name="registrar">
-                               <a href="departamentos.php" class="btn btn-danger">Cancelar</a>
+                               <a href="catalogo.php" class="btn btn-danger">Cancelar</a>
                                
                             </div>
                             </div>
@@ -99,16 +104,18 @@
 
 			if(valid){
 
-            var ceco = $('#ceco').val();
-			var descripcion = $('#descripcion').val();
-            var estado 	= $('#estado').val();
+            var fecha = $('#fecha').val();
+			var ceco = $('#ceco').val();
+            var monto 	= $('#monto').val();
+            var porcentaje 	= $('#porcentaje').val();
+            var extra 	= $('#extra').val();
 
 				e.preventDefault();	
 
 				$.ajax({
 					type: 'POST',
-					url: '../includes/depnew.php',
-					data: {ceco: ceco,descripcion: descripcion, estado: estado },
+					url: '../includes/catnew.php',
+					data: {fecha: fecha,ceco: ceco, monto: monto, porcentaje: porcentaje, extra: extra },
 					success: function(data){
 					Swal.fire({
 								'title': '¡Mensaje!',
@@ -118,7 +125,7 @@
                                 'showConfirmButton': 'false',
                                 'timer': '1500'
 								}).then(function() {
-                window.location = "departamentos.php";
+                window.location = "catalogo.php";
             });
 							
 							
