@@ -5,10 +5,8 @@ include_once "../includes/header.php";
 session_start();
 error_reporting(0);
 $varsesion = $_SESSION['usuario'];
-
 	if($varsesion== null || $varsesion= ''){
-
-	header("Location:../includes/sesion/login.php");
+	  header("Location:../includes/sesion/login.php");
 		die();
 	}
 ?>
@@ -51,9 +49,11 @@ $varsesion = $_SESSION['usuario'];
             <form action="POST" id="formulario">
                 <p>Articulos</p>
                 <label for="">Codigo</label>
-                <input type="text" class="searchbox" name="codigo" id="codigo">
+                <input type="text" class="searchbox" name="codigo" id="codigo" required>
+                <label for="quant">Cantidad</label>
+                <input type="number" class="searchbox" name="quant" id="quantity" required>
                 <input type="submit" class="btn btn-outline-secondary" name="buscar" id="buscar" value="BUSCAR">
-                </form>
+              </form>
             </div>
         </div>
    </div>
@@ -109,10 +109,10 @@ $varsesion = $_SESSION['usuario'];
             $('#buscar').click(function(e){
                 e.preventDefault();
                 var code = document.getElementById("codigo").value
+                var quant = document.getElementById("quantity").value
                 var formularioDatos = new FormData()
                 formularioDatos.append('buscador', 'buscador')
                 formularioDatos.append('codigo',  code)
-
                 fetch('recibe.php', {
                     method: 'POST',
                     body: formularioDatos
@@ -123,11 +123,10 @@ $varsesion = $_SESSION['usuario'];
                                             <tr> 
                         <td>${a.id}</td>
                         <td>${a.codigo}</td>
-                        <td>000</td>
-                        <td>000</td>
+                        <td>${quant}</td>
                         <td>${a.unidad}</td>
                         <td>${a.precio}</td>
-                        <td>${a.unidad + 3}</td>
+                        <td>${quant * a.precio}</td>
                         </tr>
                                             
                                             
