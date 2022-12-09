@@ -83,9 +83,9 @@ while ($fila = mysqli_fetch_assoc($result)):
 <td><?php echo $fila['id']; ?></td>
 <td><?php echo $fila['fecha']; ?></td>
 <td><?php echo $fila['ceco']; ?></td>
-<td><?php echo $fila['monto']; ?></td>
-<td><?php echo $fila['porcentaje']; ?></td>
-<td><?php echo $fila['extra']; ?></td>
+<td><?php echo '$'.$fila['monto']; ?></td>
+<td><?php echo $fila['porcentaje']; ?>%</td>
+<td><?php echo '$'.$fila['extra']; ?></td>
 
 </tr>
 
