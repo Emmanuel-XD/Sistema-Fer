@@ -45,11 +45,22 @@
                            
                             <div class="form-group">
                                   <label for="dep" class="form-label">Departamento:</label>
-                                  <select name="departamento" id="departamento" class="form-control" required>
-                                  <option value="">--Selecciona una opcion--</option>
-                                  <option value="Sistemas">Sistemas</option>
-                                  <option value="Empleado">Empleado</option>
-                               </select>
+                                  <select name="departamento" id="departamento" required="true" class="form-control">
+							  <option value="0">--Selecciona una opcion--</option>
+                                <?php
+
+                                include ("../db.php");
+                                //Codigo para mostrar categorias desde otra tabla
+                                $sql="SELECT * FROM departamentos ";
+                                $resultado=mysqli_query($conexion, $sql);
+                                while($consulta=mysqli_fetch_array($resultado)){
+                                    echo '<option value="'.$consulta['descripcion'].'">'.$consulta['descripcion'].'</option>';
+                                }
+
+                                ?>
+
+				
+		                      </select>
                             </div>
 
                             <div class="form-group">
