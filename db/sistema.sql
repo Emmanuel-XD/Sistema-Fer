@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-12-2022 a las 23:15:52
+-- Tiempo de generación: 09-12-2022 a las 01:22:35
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -1206,6 +1206,28 @@ INSERT INTO `articulos` (`id`, `codigo`, `estado`, `descripcion`, `unidad`, `pre
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `catalogo`
+--
+
+CREATE TABLE `catalogo` (
+  `id` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `ceco` varchar(150) NOT NULL,
+  `monto` double NOT NULL,
+  `porcentaje` float NOT NULL,
+  `extra` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `catalogo`
+--
+
+INSERT INTO `catalogo` (`id`, `fecha`, `ceco`, `monto`, `porcentaje`, `extra`) VALUES
+(1, '2022-12-16', 'ALIMENTOS', 100, 10, 100);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `ceco`
 --
 
@@ -1258,7 +1280,8 @@ CREATE TABLE `departamentos` (
 --
 
 INSERT INTO `departamentos` (`id`, `nombre`, `descripcion`, `estado`, `fecha`) VALUES
-(1, 'Alimentos', 'A AZUR CENA', 1, '2022-10-11 14:57:07');
+(1, 'Alimentos', 'A AZUR CENA', 1, '2022-10-11 14:57:07'),
+(3, 'ALIMENTOS', 'sfdg', 1, '2022-12-08 23:48:50');
 
 -- --------------------------------------------------------
 
@@ -1301,9 +1324,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `usuario`, `nombre`, `password`, `departamento`, `fecha`, `rol_id`, `estado`) VALUES
-(1, 'Emanuelxd', 'Emanuel', '12345', '', '2022-10-29 14:36:57', 1, 1),
-(3, 'Fer', 'Fernando', '12345', 'Empleado', '2022-10-29 14:37:01', 1, 1),
-(4, 'user', 'sinnombre', '12345', 'Sistemas', '2022-10-29 14:56:11', 2, 1);
+(1, 'Emanuelxd', 'Emanuel', '12345', 'A AZUR CENA', '2022-12-08 23:55:59', 1, 1),
+(3, 'Fer', 'Fernando', '12345', 'sfdg', '2022-12-08 23:55:34', 1, 1),
+(4, 'user', 'sinnombre', '12345', 'sfdg', '2022-12-08 23:55:50', 2, 1),
+(7, 'dsfgfdg', 'fsdgfdgh', '12345', 'A AZUR CENA', '2022-12-08 23:53:40', 2, 1);
 
 --
 -- Índices para tablas volcadas
@@ -1313,6 +1337,12 @@ INSERT INTO `user` (`id`, `usuario`, `nombre`, `password`, `departamento`, `fech
 -- Indices de la tabla `articulos`
 --
 ALTER TABLE `articulos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `catalogo`
+--
+ALTER TABLE `catalogo`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1357,6 +1387,12 @@ ALTER TABLE `articulos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1158;
 
 --
+-- AUTO_INCREMENT de la tabla `catalogo`
+--
+ALTER TABLE `catalogo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `ceco`
 --
 ALTER TABLE `ceco`
@@ -1372,7 +1408,7 @@ ALTER TABLE `compras`
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -1384,7 +1420,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
