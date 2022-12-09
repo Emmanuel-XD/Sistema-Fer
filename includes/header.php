@@ -38,7 +38,7 @@ $varsesion = $_SESSION['usuario'];
 		 <li class="nav-item"><a class="nav-link"href="../views/articulos.php">Articulos </a></li>
 		 <li class="nav-item"><a class="nav-link"href="../views/acceso.php" >Usuarios </a><li>
 		 <li class="nav-item"><a class="nav-link"href="../views/ceco.php" >CeCo </a><li>
-		 <li class="nav-item"><a class="nav-link"href="#" > <?php echo $_SESSION['usuario']; ?> </a><li>
+		
 		
 				</ul>
 
