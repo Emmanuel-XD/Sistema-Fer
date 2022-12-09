@@ -1,18 +1,36 @@
-<?php 
-
-
+<?php
 include_once "../includes/header.php";
-session_start();
-error_reporting(0);
-$varsesion = $_SESSION['usuario'];
-	if($varsesion== null || $varsesion= ''){
-	  header("Location:../includes/sesion/login.php");
-		die();
-	}
+include_once "../includes/db.php";
 ?>
+<?php
+error_reporting(0);
+session_start();
+$varsesion = $_SESSION['usuario'];
+
+if($varsesion == null || $varsesion == ''){
 
 
-	
+}
+?>
+<?php
+
+$sql = "SELECT * FROM user WHERE usuario ='$varsesion'";
+$usuarios = mysqli_query($conexion, $sql);
+if($usuarios -> num_rows > 0){
+foreach($usuarios as $key => $fila ){
+
+
+
+
+?>
+<tr>
+
+</tr>
+
+<?php
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     
@@ -37,7 +55,7 @@ $varsesion = $_SESSION['usuario'];
             <label for="">Folio</label>
    <input type="text" class="">
    <label for="">Departamento</label>
-   <input type="text" class="">
+   <input type="text" class="" value="<?php echo $fila['departamento']; ?> ">
    <label for="">Comentarios</label>
    <input type="text" class="">
     </div>
@@ -125,8 +143,8 @@ $varsesion = $_SESSION['usuario'];
                         <td>${a.codigo}</td>
                         <td>${quant}</td>
                         <td>${a.unidad}</td>
-                        <td>${a.precio}</td>
-                        <td>${quant * a.precio}</td>
+                        <td>$${a.precio}</td>
+                        <td>$${quant * a.precio}</td>
                         </tr>
                                             
                                             
