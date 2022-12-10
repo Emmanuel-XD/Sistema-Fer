@@ -19,13 +19,28 @@ $usuarios = mysqli_query($conexion, $sql);
 if($usuarios -> num_rows > 0){
 foreach($usuarios as $key => $fila ){
 
-
-
 ?>
+
+
 <?php
 }
 }
 ?>
+
+
+<div class="container is-fluid">
+<div class="col-xs-12">
+		<h1>Compras</h1>
+    <br>
+		<div>
+            <label for="">Folio</label>
+   <input type="text" class="">
+   <label for="">Departamento</label>
+   <input type="text" class="" value="<?php echo $fila['departamento']; ?> ">
+   <label for="">Comentarios</label>
+   <input type="text" class="">
+    </div>
+    <br>
 
  
 <!--     <div class="modal-buy" id="test">
@@ -99,6 +114,7 @@ foreach($usuarios as $key => $fila ){
   </div>
   </div>
 </div>
+	<div class="col-sm-6">
         <table class="table table-striped"  >
                          <thead>    
                          <tr class="bg-dark" style="color: white;">
