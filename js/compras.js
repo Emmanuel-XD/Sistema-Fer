@@ -5,6 +5,7 @@ const suggBox = searchWrapper.querySelector(".autocom-box");
 const icon = searchWrapper.querySelector(".icon");
 let linkTag = searchWrapper.querySelector("a");
 let webLink;
+let cantsum;
 // if user press any key and release
 inputBox.addEventListener('input', (e)=>{
     let userData = e.target.value; //user enetered data
@@ -97,19 +98,32 @@ function addCar(id) {
             result = ["error"]
         }
         else{
+           
         Response.map(function(a){
+            if(document.getElementById(`cant-${a.id}`) != null){
+                cantsum =   document.getElementById(`cant-${a.id}`).textContent
+                cantsum = parseFloat(cantsum) + 1
+                total =   parseFloat(a.precio) * parseFloat(cantsum)
+                document.getElementById(`cant-${a.id}`).innerHTML = cantsum;
+                document.getElementById(`total-${a.id}`).innerHTML = total.toFixed(2);
+            }
+            else{
+           
+            console.log(parseFloat(a.precio))
             result = `
-            <tr ${a.id}=${a.id}>
+            <tr id="row-${a.id}">
             <td>${a.id}</td>
             <td>${a.codigo}</td>
-            <td>${a.cantidad}</td>
+            <td id='cant-${a.id}'>1</td>
             <td>${a.codigo}</td>
             <td>${a.precio}</td>
-            <td>${a.precio}</td>
+            <td id="total-${a.id}">${a.precio}</td>
           </tr>`;
+          innerData = 
+          document.getElementById("formtable").innerHTML += result;
+        }
         })
         }
-        innerData = 
-        document.getElementById("formtable").innerHTML += result;
+       
 })
 }
