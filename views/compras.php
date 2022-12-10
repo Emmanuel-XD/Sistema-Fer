@@ -34,11 +34,11 @@ foreach($usuarios as $key => $fila ){
     <br>
 		<div>
             <label for="">Folio</label>
-   <input type="text" class="">
+   <input type="text" class="control">
    <label for="">Departamento</label>
-   <input type="text" class="" value="<?php echo $fila['departamento']; ?> ">
+   <input type="text" class="control" readonly value="<?php echo $fila['departamento']; ?> ">
    <label for="">Comentarios</label>
-   <input type="text" class="">
+   <input type="text" class="control">
     </div>
     <br>
 
@@ -120,6 +120,7 @@ foreach($usuarios as $key => $fila ){
                          <tr class="bg-dark" style="color: white;">
                         <th >Id</th>
                         <th>Codigo</th>
+                        <th>Descripcion</th>
                         <th>Cantidad</th>
                         <th>Unidad</th>
                         <th>PrecioUnit</th>
@@ -133,12 +134,14 @@ foreach($usuarios as $key => $fila ){
   </div>
   </div>
   </div>
+  <br>
+  <br>
   <label for="">Requisicion Actual</label>
-  <input type="text">
+  <input type="text" class="control" readonly>
   <label for="">Limite de Monto</label>
-  <input type="text">
+  <input type="text" class="control" readonly>
   <label for="">Total Requesiciones</label>
-  <input type="text">
+  <input type="text" class="control" readonly>
 
 </body>
 <script src="../js/bootstrap.min.js"></script>
