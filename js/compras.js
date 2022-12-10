@@ -15,6 +15,7 @@ inputBox.addEventListener('input', (e)=>{
         var formularioDatos = new FormData()
         formularioDatos.append('buscador', 'buscador')
         formularioDatos.append('codigo',  code)
+        formularioDatos.append('descripcion',  code)
         fetch('recibe.php', {
             method: 'POST',
             body: formularioDatos
@@ -25,6 +26,7 @@ inputBox.addEventListener('input', (e)=>{
             else{
             result = Response.map(function(a){
                 return {id: a.id,
+                    descripcion: a.descripcion,
                     codigo: a.codigo,
                     unidad: a.unidad,
                     precio: a.precio}
@@ -42,7 +44,7 @@ inputBox.addEventListener('input', (e)=>{
             if(data.codigo == undefined){
                 return data = ""
             }
-            return data = `<div class="row list-class"><div class="col-sm-10"> <li>${data.codigo} | ${data.unidad} | ${data.precio}</div> <div class="col-sm-2"> <i id="${data.id}" class="btn marg btn-warning fa-solid fa-plus"></i></li></div></div>`;
+            return data = `<div class="row list-class"><div class="col-sm-10"> <li>${data.codigo} | ${data.descripcion} | ${data.unidad} | ${data.precio}</div> <div class="col-sm-2"> <i id="${data.id}" class="btn marg btn-warning fa-solid fa-plus"></i></li></div></div>`;
         });
         searchWrapper.classList.add("active"); //show autocomplete box
         showSuggestions(emptyArray);
@@ -114,8 +116,9 @@ function addCar(id) {
             <tr id="row-${a.id}">
             <td>${a.id}</td>
             <td>${a.codigo}</td>
+            <td>${a.descripcion}</td>
             <td id='cant-${a.id}'>1</td>
-            <td>${a.codigo}</td>
+            <td>${a.unidad}</td>
             <td>${a.precio}</td>
             <td id="total-${a.id}">${a.precio}</td>
           </tr>`;
