@@ -27,6 +27,9 @@ if (isset($_POST['accion'])){
             acceso_user();
             break;
 
+            case 'get-article':
+            get_article();
+            break;
 
 		}
 
@@ -160,6 +163,21 @@ function acceso_user(){
             session_destroy();
         }
 }
+function get_article(){
+require_once ("db.php");
+extract($_POST);
+$consulta = "SELECT * FROM articulos WHERE id = $id";
+$resultado=mysqli_query($conexion,$consulta);
+if (mysqli_num_rows($resultado)>0)
+    {    
+        while ($dato = mysqli_fetch_assoc($resultado) ){
+         $datos[] = $dato;
+    }
+    echo json_encode($datos);
+    }
+    else {
+    echo json_encode('error');
+    }
 
-
+}
 ?>

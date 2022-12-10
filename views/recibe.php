@@ -6,7 +6,7 @@ if(isset($_POST['buscador']))
 {
 	$codigo = $_POST['codigo'];
 
-	$consulta = "SELECT * FROM articulos WHERE codigo = '$codigo'"; 
+	$consulta = "SELECT * FROM articulos WHERE UPPER(codigo) LIKE '%$codigo%' LIMIT 5"; 
 	$resultado = mysqli_query($conexion, $consulta);
 	$map_result = mysqli_num_rows($resultado);
 	if($map_result){
@@ -15,10 +15,7 @@ if(isset($_POST['buscador']))
 		}
 		echo json_encode($datos);
 	} else{
-        echo "<script language='JavaScript'>
-        alert('No existe ese codigo en la db');
-        location.assign('compras.php');
-        </script>";
+       echo json_encode("error");
 	}
 }
 

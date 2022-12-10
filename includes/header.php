@@ -18,9 +18,10 @@ $varsesion = $_SESSION['usuario'];
 
 
 	<link rel="stylesheet" href="../css/fontawesome-all.min.css">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
 	<link rel="stylesheet" href="../css/estilo.css">
 	<link rel="stylesheet" href="../css/es.css">
+	<script src="../js/jquery.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -58,7 +59,5 @@ $varsesion = $_SESSION['usuario'];
 		</div>
 	</nav>
 	
-	<div class="container">
-		<div class="row">
            <script src="../js/contenido.js"></script>
 	
