@@ -163,6 +163,7 @@ foreach($usuarios as $key => $fila ){
   <input type="text" class="control" readonly>
 
 </body>
+<script src="../js/compras.js"></script>
 <script src="../js/bootstrap.min.js"></script>
 
 <!-- <script src="../js/jquery.min.js"></script> -->
