@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-12-2022 a las 01:22:35
+-- Tiempo de generación: 13-12-2022 a las 00:00:19
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -1212,7 +1212,7 @@ INSERT INTO `articulos` (`id`, `codigo`, `estado`, `descripcion`, `unidad`, `pre
 CREATE TABLE `catalogo` (
   `id` int(11) NOT NULL,
   `fecha` date NOT NULL,
-  `ceco` varchar(150) NOT NULL,
+  `id_ceco` int(11) NOT NULL,
   `monto` double NOT NULL,
   `porcentaje` float NOT NULL,
   `extra` float NOT NULL
@@ -1222,8 +1222,13 @@ CREATE TABLE `catalogo` (
 -- Volcado de datos para la tabla `catalogo`
 --
 
-INSERT INTO `catalogo` (`id`, `fecha`, `ceco`, `monto`, `porcentaje`, `extra`) VALUES
-(1, '2022-12-16', 'ALIMENTOS', 100, 10, 100);
+INSERT INTO `catalogo` (`id`, `fecha`, `id_ceco`, `monto`, `porcentaje`, `extra`) VALUES
+(10, '2022-12-12', 2, 10000, 30, 300),
+(11, '2022-12-21', 3, 500, 2, 10),
+(12, '2022-12-31', 6, 5000, 25, 1250),
+(13, '2022-12-30', 1, 300, 2, 6),
+(14, '2022-12-21', 1, 7000, 0, 0),
+(15, '2022-12-31', 6, 9000, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1233,7 +1238,7 @@ INSERT INTO `catalogo` (`id`, `fecha`, `ceco`, `monto`, `porcentaje`, `extra`) V
 
 CREATE TABLE `ceco` (
   `id` int(11) NOT NULL,
-  `descripcion` varchar(150) NOT NULL,
+  `centro` varchar(150) NOT NULL,
   `estado` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -1242,8 +1247,13 @@ CREATE TABLE `ceco` (
 -- Volcado de datos para la tabla `ceco`
 --
 
-INSERT INTO `ceco` (`id`, `descripcion`, `estado`, `fecha`) VALUES
-(1, 'ALIMENTOS', 1, '2022-12-08 22:04:37');
+INSERT INTO `ceco` (`id`, `centro`, `estado`, `fecha`) VALUES
+(1, 'ALIMENTOS', 1, '2022-12-12 15:50:46'),
+(2, 'COMEDOR', 1, '2022-12-12 15:50:56'),
+(3, 'BEBIDAS', 1, '2022-12-12 15:51:12'),
+(4, 'VINOS', 1, '2022-12-12 15:51:40'),
+(5, 'ACTIVIDADES RH', 1, '2022-12-12 15:51:53'),
+(6, 'CALL CENTER', 1, '2022-12-12 15:52:03');
 
 -- --------------------------------------------------------
 
@@ -1269,7 +1279,7 @@ CREATE TABLE `compras` (
 
 CREATE TABLE `departamentos` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL,
+  `id_ceco` int(11) NOT NULL,
   `descripcion` varchar(250) NOT NULL,
   `estado` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -1279,9 +1289,14 @@ CREATE TABLE `departamentos` (
 -- Volcado de datos para la tabla `departamentos`
 --
 
-INSERT INTO `departamentos` (`id`, `nombre`, `descripcion`, `estado`, `fecha`) VALUES
-(1, 'Alimentos', 'A AZUR CENA', 1, '2022-10-11 14:57:07'),
-(3, 'ALIMENTOS', 'sfdg', 1, '2022-12-08 23:48:50');
+INSERT INTO `departamentos` (`id`, `id_ceco`, `descripcion`, `estado`, `fecha`) VALUES
+(1, 1, 'A AZUR CENA', 1, '2022-12-12 16:56:08'),
+(2, 1, 'A AZUR COMIDA', 1, '2022-12-12 16:55:58'),
+(3, 1, 'A BANQUETES', 1, '2022-12-12 16:55:58'),
+(4, 1, 'A CARNICERIA', 1, '2022-12-12 17:16:20'),
+(6, 6, 'A AZUR COMEDOR', 1, '2022-12-12 21:42:02'),
+(9, 3, 'A COCINA FRIA', 1, '2022-12-12 21:40:42'),
+(10, 2, 'EJEMPLO', 1, '2022-12-12 22:18:15');
 
 -- --------------------------------------------------------
 
@@ -1312,8 +1327,8 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `departamento` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `id_depa` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `rol_id` int(11) NOT NULL,
   `estado` int(11) NOT NULL
@@ -1323,11 +1338,12 @@ CREATE TABLE `user` (
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`id`, `usuario`, `nombre`, `password`, `departamento`, `fecha`, `rol_id`, `estado`) VALUES
-(1, 'Emanuelxd', 'Emanuel', '12345', 'A AZUR CENA', '2022-12-08 23:55:59', 1, 1),
-(3, 'Fer', 'Fernando', '12345', 'sfdg', '2022-12-08 23:55:34', 1, 1),
-(4, 'user', 'sinnombre', '12345', 'sfdg', '2022-12-08 23:55:50', 2, 1),
-(7, 'dsfgfdg', 'fsdgfdgh', '12345', 'A AZUR CENA', '2022-12-08 23:53:40', 2, 1);
+INSERT INTO `user` (`id`, `usuario`, `nombre`, `password`, `id_depa`, `fecha`, `rol_id`, `estado`) VALUES
+(1, 'Emanuel', 'Emanuel', '12345', 6, '2022-12-12 22:00:26', 1, 1),
+(2, 'Alejandro', 'Alejandro', '12345', 2, '2022-12-12 21:38:33', 1, 1),
+(4, 'usuario', 'usuario', '12345', 3, '2022-12-12 21:39:55', 2, 2),
+(5, 'Prueba', 'prueba', '12345', 9, '2022-12-12 22:12:10', 1, 1),
+(6, 'Fer', 'Fernando', '12345', 10, '2022-12-12 22:20:06', 2, 1);
 
 --
 -- Índices para tablas volcadas
@@ -1373,8 +1389,7 @@ ALTER TABLE `permisos`
 -- Indices de la tabla `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `permisos` (`rol_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -1390,13 +1405,13 @@ ALTER TABLE `articulos`
 -- AUTO_INCREMENT de la tabla `catalogo`
 --
 ALTER TABLE `catalogo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `ceco`
 --
 ALTER TABLE `ceco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `compras`
@@ -1408,7 +1423,7 @@ ALTER TABLE `compras`
 -- AUTO_INCREMENT de la tabla `departamentos`
 --
 ALTER TABLE `departamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -1420,17 +1435,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `user`
---
-ALTER TABLE `user`
-  ADD CONSTRAINT `permisos` FOREIGN KEY (`rol_id`) REFERENCES `permisos` (`id`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
