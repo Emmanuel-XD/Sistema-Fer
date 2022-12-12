@@ -32,7 +32,7 @@
 
                             <div class="form-group">
                                 <label for="desc">Descripcion:</label><br>
-                                <input type="text" name="descripcion" id="descripcion" class="form-control" required>
+                                <input type="text" name="centro" id="centro" class="form-control" required>
                             </div>
 
                             
@@ -81,7 +81,7 @@
 			if(valid){
 
             var nombre = $('#nombre').val();
-			var descripcion = $('#descripcion').val();
+			var centro = $('#centro').val();
             var estado 	= $('#estado').val();
 
 				e.preventDefault();	
@@ -89,7 +89,7 @@
 				$.ajax({
 					type: 'POST',
 					url: '../includes/ceconew.php',
-					data: {descripcion: descripcion, estado: estado },
+					data: {centro: centro, estado: estado },
 					success: function(data){
 					Swal.fire({
 								'title': '¡Mensaje!',

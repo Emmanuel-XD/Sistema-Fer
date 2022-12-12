@@ -9,15 +9,15 @@
 
 require_once ("db.php");
 if(isset($_POST)){
-  if (strlen($_POST['descripcion']) >= 1 && strlen($_POST['estado']) >= 1) {
+  if (strlen($_POST['centro']) >= 1 && strlen($_POST['estado']) >= 1) {
        
 
-        $descripcion = trim($_POST['descripcion']);
+        $centro = trim($_POST['centro']);
         $estado = trim($_POST['estado']);
 
 
-  $consulta = "INSERT INTO ceco (descripcion, estado)
-        VALUES ( '$descripcion', '$estado')";
+  $consulta = "INSERT INTO ceco (centro, estado)
+        VALUES ( '$centro', '$estado')";
    $resultado=mysqli_query($conexion, $consulta);
 
       if($resultado){

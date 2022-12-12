@@ -36,7 +36,7 @@
 
                             <div class="form-group">
                             <label for="" class="form-label">CeCo*</label>
-                            <select name="ceco" id="ceco" required="true" class="form-control">
+                            <select name="id_ceco" id="id_ceco" required="true" class="form-control">
 							  <option value="0">--Selecciona una opcion--</option>
                                 <?php
 
@@ -45,7 +45,7 @@
                                 $sql="SELECT * FROM ceco ";
                                 $resultado=mysqli_query($conexion, $sql);
                                 while($consulta=mysqli_fetch_array($resultado)){
-                                    echo '<option value="'.$consulta['descripcion'].'">'.$consulta['descripcion'].'</option>';
+                                    echo '<option value="'.$consulta['id'].'">'.$consulta['centro'].'</option>';
                                 }
 
                                 ?>
@@ -126,7 +126,7 @@ function comprueba(valor){
 			if(valid){
 
             var fecha = $('#fecha').val();
-			var ceco = $('#ceco').val();
+			var id_ceco = $('#id_ceco').val();
             var monto 	= $('#monto').val();
             var porcentaje 	= $('#porcentaje').val();
             var extra 	= $('#extra').val();
@@ -136,7 +136,7 @@ function comprueba(valor){
 				$.ajax({
 					type: 'POST',
 					url: '../includes/catnew.php',
-					data: {fecha: fecha,ceco: ceco, monto: monto, porcentaje: porcentaje, extra: extra },
+					data: {fecha: fecha,id_ceco: id_ceco, monto: monto, porcentaje: porcentaje, extra: extra },
 					success: function(data){
 					Swal.fire({
 								'title': '¡Mensaje!',
