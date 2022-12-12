@@ -45,7 +45,7 @@
                            
                             <div class="form-group">
                                   <label for="dep" class="form-label">Departamento:</label>
-                                  <select name="departamento" id="departamento" required="true" class="form-control">
+                                  <select name="id_depa" id="id_depa" required="true" class="form-control">
 							  <option value="0">--Selecciona una opcion--</option>
                                 <?php
 
@@ -54,7 +54,7 @@
                                 $sql="SELECT * FROM departamentos ";
                                 $resultado=mysqli_query($conexion, $sql);
                                 while($consulta=mysqli_fetch_array($resultado)){
-                                    echo '<option value="'.$consulta['descripcion'].'">'.$consulta['descripcion'].'</option>';
+                                    echo '<option value="'.$consulta['id'].'">'.$consulta['descripcion'].'</option>';
                                 }
 
                                 ?>
@@ -117,7 +117,7 @@
             var usuario 	= $('#usuario').val();
 			var nombre 	= $('#nombre').val();
 			var password 	= $('#password').val();
-            var departamento = $('#departamento').val();
+            var id_depa = $('#id_depa').val();
 			var estado	= $('#estado').val();
             var rol_id	= $('#rol_id').val();
 			
@@ -127,7 +127,7 @@
 				$.ajax({
 					type: 'POST',
 					url: '../includes/sesion/validar.php',
-					data: {usuario: usuario,nombre: nombre,password: password, departamento: departamento,
+					data: {usuario: usuario,nombre: nombre,password: password, id_depa: id_depa,
                     estado : estado, rol_id : rol_id},
 					success: function(data){
 					Swal.fire({
