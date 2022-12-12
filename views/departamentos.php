@@ -72,13 +72,14 @@ $varsesion = $_SESSION['usuario'];
 				<?php
 
 require_once ("../includes/db.php");             
-$result=mysqli_query($conexion,"SELECT * FROM departamentos");
+$result=mysqli_query($conexion,"SELECT d.id, d.descripcion,d.estado, d.fecha, c.centro
+FROM departamentos d INNER JOIN ceco c ON d.id_ceco = c.id");
 while ($fila = mysqli_fetch_assoc($result)):
     
 ?>
 <tr>
 <td><?php echo $fila['id']; ?></td>
-<td><?php echo $fila['nombre']; ?></td>
+<td><?php echo $fila['centro']; ?></td>
 <td><?php echo $fila['descripcion']; ?></td>
 <td><?php echo $fila['estado']; ?></td>
 <td><?php echo $fila['fecha']; ?></td>
@@ -87,7 +88,7 @@ while ($fila = mysqli_fetch_assoc($result)):
 <a class="btn btn-warning" href="../includes/editar_dep.php?id=<?php echo $fila['id']?> ">
 editar</a>
 <a href="../includes/eliminar_dep.php?id=<?php echo $fila['id']?> " class="btn btn-danger btn-del" >
-eliminar</a></button>
+eliminar</a>
 </td>
 </tr>
 
@@ -107,7 +108,7 @@ e.preventDefault();
 const href = $(this).attr('href')
 
 Swal.fire({
-  title: 'Estas seguro de eliminar este usuario?',
+  title: 'Estas seguro de eliminar este registro?',
   text: "¡No podrás revertir esto!!",
   icon: 'warning',
   showCancelButton: true,
@@ -120,7 +121,7 @@ Swal.fire({
         if (result.isConfirmed) {
     Swal.fire(
       'Eliminado!',
-      'El usuario fue eliminado.',
+      'El registro fue eliminado.',
       'success'
     )
   }

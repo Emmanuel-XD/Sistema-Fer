@@ -79,7 +79,7 @@ while ($fila = mysqli_fetch_assoc($result)):
 ?>
 <tr>
 <td><?php echo $fila['id']; ?></td>
-<td><?php echo $fila['descripcion']; ?></td>
+<td><?php echo $fila['centro']; ?></td>
 <td><?php echo $fila['estado']; ?></td>
 <td><?php echo $fila['fecha']; ?></td>
 

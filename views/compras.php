@@ -14,7 +14,9 @@ if($varsesion == null || $varsesion == ''){
 ?>
 <?php
 
-$sql = "SELECT * FROM user WHERE usuario ='$varsesion'";
+$sql = "SELECT u.id, u.nombre, u.usuario, u.password, u.fecha, u.estado,
+p.rol,d.descripcion FROM user u LEFT JOIN permisos p ON u.rol_id = p.id LEFT JOIN departamentos d
+ON u.id_depa = d.id WHERE usuario ='$varsesion'";
 $usuarios = mysqli_query($conexion, $sql);
 if($usuarios -> num_rows > 0){
 foreach($usuarios as $key => $fila ){
@@ -36,7 +38,7 @@ foreach($usuarios as $key => $fila ){
             <label for="">Folio</label>
    <input type="text" class="control">
    <label for="">Departamento</label>
-   <input type="text" class="control" readonly value="<?php echo $fila['departamento']; ?> ">
+   <input type="text" class="control" readonly value="<?php echo $fila['descripcion']; ?> ">
    <label for="">Comentarios</label>
    <input type="text" class="control">
     </div>
@@ -136,16 +138,33 @@ foreach($usuarios as $key => $fila ){
   </div>
   <br>
   <br>
+  <?php
+
+$sql = "SELECT cat.id, cat.fecha,  cat.monto, cat.porcentaje, c.centro, d.descripcion, u.usuario
+FROM catalogo cat INNER JOIN ceco c ON cat.id_ceco = c.id
+INNER JOIN departamentos d ON cat.id_ceco = d.id_ceco 
+INNER JOIN user u ON u.id_depa = d.id  WHERE usuario ='$varsesion' ORDER BY cat.fecha DESC ";
+$usuarios = mysqli_query($conexion, $sql);
+if($usuarios -> num_rows > 0){
+foreach($usuarios as $key => $fila ){
+
+?>
+
+
+<?php
+}
+}
+?>
   <label for="">Requisicion Actual</label>
   <input type="text" class="control" readonly>
   <label for="">Limite de Monto</label>
-  <input type="text" class="control" readonly>
+  <input type="text" class="control" value="<?php echo '$'.$fila['monto']; ?>" readonly>
   <label for="">Total Requesiciones</label>
   <input type="text" class="control" readonly>
 
 </body>
 <script src="../js/bootstrap.min.js"></script>
-<script src="../js/compras.js"></script>
+
 <!-- <script src="../js/jquery.min.js"></script> -->
 
 

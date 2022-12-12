@@ -75,14 +75,17 @@ $varsesion = $_SESSION['usuario'];
 				<?php
 
 require_once ("../includes/db.php");             
-$result=mysqli_query($conexion,"SELECT * FROM catalogo");
+$result=mysqli_query($conexion,"SELECT ca.id, ca.fecha,ca.monto, ca.porcentaje, ca.extra, c.centro
+FROM catalogo ca
+INNER JOIN ceco c
+ON ca.id_ceco = c.id");
 while ($fila = mysqli_fetch_assoc($result)):
     
 ?>
 <tr>
 <td><?php echo $fila['id']; ?></td>
 <td><?php echo $fila['fecha']; ?></td>
-<td><?php echo $fila['ceco']; ?></td>
+<td><?php echo $fila['centro']; ?></td>
 <td><?php echo '$'.$fila['monto']; ?></td>
 <td><?php echo $fila['porcentaje']; ?>%</td>
 <td><?php echo '$'.$fila['extra']; ?></td>

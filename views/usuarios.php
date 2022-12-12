@@ -74,9 +74,9 @@ $varsesion = $_SESSION['usuario'];
 				<?php
 
 require_once ("../includes/db.php");             
-$result=mysqli_query($conexion,"SELECT user.id, user.usuario, user.nombre, user.password, user.departamento, 
-user.fecha, user.estado , permisos.rol FROM user 
-LEFT JOIN permisos ON user.rol_id= permisos.id ");
+$result=mysqli_query($conexion,"SELECT u.id, u.nombre, u.usuario, u.password, u.fecha, u.estado,
+p.rol,d.descripcion FROM user u LEFT JOIN permisos p ON u.rol_id = p.id LEFT JOIN departamentos d
+ON u.id_depa = d.id ");
 while ($fila = mysqli_fetch_assoc($result)):
     
 ?>
@@ -84,7 +84,7 @@ while ($fila = mysqli_fetch_assoc($result)):
 <td><?php echo $fila['usuario']; ?></td>
 <td><?php echo $fila['nombre']; ?></td>
 <td><?php echo $fila['password']; ?></td>
-<td><?php echo $fila['departamento']; ?></td>
+<td><?php echo $fila['descripcion']; ?></td>
 <td><?php echo $fila['fecha']; ?></td>
 <td><?php echo $fila['estado']; ?></td>
 <td><?php echo $fila['rol']; ?></td>
