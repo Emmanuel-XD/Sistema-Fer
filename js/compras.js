@@ -117,11 +117,16 @@ function addCar(id) {
             <td>${a.id}</td>
             <td>${a.codigo}</td>
             <td>${a.descripcion}</td>
-            <td id='cant-${a.id}'>1</td>
+            <td><input min='1' id='cant-${a.cantidad}'name='cantidad' class='form-control' required type='number' step='0.1' value= '${a.cantidad = 1}'>
+            </td>
             <td>${a.unidad}</td>
             <td>${a.precio}</td>
             <td id="total-${a.id}">${a.precio}</td>
-          </tr>`;
+          </tr>
+          
+    
+          `;
+          
           innerData = 
           document.getElementById("formtable").innerHTML += result;
         }
