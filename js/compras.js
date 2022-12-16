@@ -6,6 +6,8 @@ const icon = searchWrapper.querySelector(".icon");
 let linkTag = searchWrapper.querySelector("a");
 let webLink;
 let cantsum;
+let inputcant;
+let cantsuminp;
 // if user press any key and release
 inputBox.addEventListener('input', (e)=>{
     let userData = e.target.value; //user enetered data
@@ -102,12 +104,25 @@ function addCar(id) {
         else{
            
         Response.map(function(a){
+            
             if(document.getElementById(`cant-${a.id}`) != null){
-                cantsum =   document.getElementById(`cant-${a.id}`).textContent
-                cantsum = parseFloat(cantsum) + 1
+                cantsuminp = document.getElementById(`cant-${a.id}`)
+                cantsum =   document.getElementById(`cant-${a.id}`).value
+                cantsum = parseFloat(cantsum) + 1;
+
+                inputcant = document.getElementById(`total-${a.id}`)
                 total =   parseFloat(a.precio) * parseFloat(cantsum)
-                document.getElementById(`cant-${a.id}`).innerHTML = cantsum;
-                document.getElementById(`total-${a.id}`).innerHTML = total.toFixed(2);
+                document.getElementById(`cant-${a.id}`).value = cantsum;
+                inputcant.innerHTML = total.toFixed(2);
+
+                console.log(cantsuminp);
+                cantsuminp.addEventListener('input',function(){
+                    cantsum =   document.getElementById(`cant-${a.id}`).value
+                    total =   parseFloat(a.precio) * parseFloat(cantsum)
+                    console.log(cantsum)
+                    inputcant.innerHTML = total.toFixed(2);
+                    console.log(inputcant.textContent)
+                })
             }
             else{
            
@@ -117,7 +132,7 @@ function addCar(id) {
             <td>${a.id}</td>
             <td>${a.codigo}</td>
             <td>${a.descripcion}</td>
-            <td><input min='1' id='cant-${a.cantidad}'name='cantidad' class='form-control' required type='number' step='0.1' value= '${a.cantidad = 1}'>
+            <td><input min='1' id='cant-${a.id}'name='cantidad' class='form-control' required type='number' step='0.1' value= '${a.cantidad = 1}'>
             </td>
             <td>${a.unidad}</td>
             <td>${a.precio}</td>
@@ -126,9 +141,18 @@ function addCar(id) {
           
     
           `;
-          
+
           innerData = 
           document.getElementById("formtable").innerHTML += result;
+          cantsuminp = document.getElementById(`cant-${a.id}`)
+          inputcant = document.getElementById(`total-${a.id}`)
+          cantsuminp.addEventListener('input',function(){
+            cantsum =   document.getElementById(`cant-${a.id}`).value
+            total =   parseFloat(a.precio) * parseFloat(cantsum)
+            console.log(cantsum)
+            inputcant.innerHTML = total.toFixed(2);
+            console.log(inputcant.textContent)
+        })
         }
         })
         }
