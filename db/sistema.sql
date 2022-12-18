@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-12-2022 a las 00:00:19
+-- Tiempo de generación: 18-12-2022 a las 07:12:05
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -1206,6 +1206,20 @@ INSERT INTO `articulos` (`id`, `codigo`, `estado`, `descripcion`, `unidad`, `pre
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `art_vendidos`
+--
+
+CREATE TABLE `art_vendidos` (
+  `id` int(11) NOT NULL,
+  `id_articulo` int(11) NOT NULL,
+  `cantidad` float NOT NULL,
+  `precio` float NOT NULL,
+  `id_compra` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `catalogo`
 --
 
@@ -1263,12 +1277,11 @@ INSERT INTO `ceco` (`id`, `centro`, `estado`, `fecha`) VALUES
 
 CREATE TABLE `compras` (
   `id` int(11) NOT NULL,
-  `codigo` varchar(150) NOT NULL,
-  `cantidad` varchar(150) NOT NULL,
-  `unidad` varchar(150) NOT NULL,
-  `preciounit` varchar(150) NOT NULL,
-  `total` varchar(150) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `total` float NOT NULL,
+  `usuario` varchar(50) NOT NULL,
+  `departamento` varchar(50) NOT NULL,
+  `folio` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1356,6 +1369,12 @@ ALTER TABLE `articulos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `art_vendidos`
+--
+ALTER TABLE `art_vendidos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `catalogo`
 --
 ALTER TABLE `catalogo`
@@ -1400,6 +1419,12 @@ ALTER TABLE `user`
 --
 ALTER TABLE `articulos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1158;
+
+--
+-- AUTO_INCREMENT de la tabla `art_vendidos`
+--
+ALTER TABLE `art_vendidos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `catalogo`
