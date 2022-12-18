@@ -42,8 +42,7 @@ foreach($usuarios as $key => $fila ){
    <label for="">Comentarios</label>
    <input type="text" class="control">
     </div>
-    <br>
-
+    <br> 
  
 <!--     <div class="modal-buy" id="test">
         <div class="modal-content-buy">
@@ -138,6 +137,16 @@ foreach($usuarios as $key => $fila ){
   </div>
   <br>
   <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+  <button class="form-control btn btn-danger"> Cerrar y continuar requisición más tade...</button>
+      </div>
+      <div class="col-sm-6">
+  <button class="form-control btn btn-success">Cerrar y realizar requisición...</button>
+      </div>
+   </div>
+  </div>
   <?php
 
 $sql = "SELECT cat.id, cat.fecha,  cat.monto, cat.porcentaje, c.centro, d.descripcion, u.usuario

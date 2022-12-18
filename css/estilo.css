@@ -90,7 +90,12 @@ body{
   background: #efefef;
 }
 .marg{
-	margin-left: 20px;
+	margin-top: 4px;
+}
+.btn-minus{
+  background-color: #dc3545;
+  padding: 10px;
+  border-radius: 5px;
 }
 .search-input .icon{
 /* 	background-color: #696969; */
@@ -130,4 +135,18 @@ th:first-child {
 td:last-child,
 th:last-child {
   border-radius: 0 16px 16px 0;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.quantity-mult{
+  padding: 0px !important;
+  text-align: center;
+}
+.lowerNumber{
+  background-color: #f8d7da;
+  color: red !important;
+  border: 10px !important;
 }
