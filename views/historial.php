@@ -77,7 +77,7 @@ $compras = $sentencia->fetchAll(PDO::FETCH_OBJ);
 					</td>
 					<td><?php echo  '$', $compra->total ?></td>
 					
-					<td><a class="btn btn-outline-danger" target="_blank" href="<?php echo "requisicion.php?id=" . $venta->id ?>"><i class="fa fa-print"></i></a></td>
+					<td><a class="btn btn-outline-danger" target="_blank" href="<?php echo "requisicion.php?id=" . $compra->id ?>"><i class="fa fa-print"></i></a></td>
 					<td><?php echo $compra->usuario ?></td>
 					<td><?php echo $compra->departamento ?></td>
 				</tr>
