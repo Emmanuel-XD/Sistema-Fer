@@ -44,7 +44,7 @@ $pdf->setY(20);$pdf->setX(80);
 $pdf->Cell(60,4,'HOTEL LIVE AQUA CANCUN',0,1,'C');
 
 
-$pdf->SetFont('Arial','',10); 
+$pdf->SetFont('Arial','B',10); 
 $pdf->Ln(5);
 $pdf->setY(40);$pdf->setX(10);
 $pdf->Cell(60,4,'Departamento: '. utf8_decode($compra->departamento) ,0,1,'C');
@@ -58,7 +58,7 @@ $pdf->Cell(60,4,'Usuario: ' . utf8_decode($compra->usuario),0,1,'C');
 $pdf->setY(40);$pdf->setX(150);
 $pdf->Cell(60,4,'Folio: ' . utf8_decode($compra->folio),0,1,'C');
 
-
+$pdf->SetFont('Arial','',10); 
 
 /// Apartir de aqui empezamos con la tabla de productos
 $pdf->setY(60);$pdf->setX(135);
@@ -112,7 +112,7 @@ $header = array("", "");
 $data2 = array(
 
     
-	array("Total:", utf8_decode($compra->total)),
+	//array("Total:", utf8_decode($compra->total)),
 );
     // Column widths
     $w2 = array(40, 40);
@@ -141,7 +141,7 @@ $pdf->SetFont('Arial','B',10);
 
 $pdf->setY(150);
 $pdf->setX(10);
-$pdf->Cell(60,4,'Articulos en lista: '.utf8_decode($filas['total']),0,1,'C');
+$pdf->Cell(60,4,'Total: '.number_format($compra->total),0,1,'C');
 
 }
 }
