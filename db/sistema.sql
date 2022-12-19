@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-12-2022 a las 07:12:05
+-- Tiempo de generación: 19-12-2022 a las 02:00:03
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -1213,9 +1213,21 @@ CREATE TABLE `art_vendidos` (
   `id` int(11) NOT NULL,
   `id_articulo` int(11) NOT NULL,
   `cantidad` float NOT NULL,
+  `unidad` varchar(50) NOT NULL,
   `precio` float NOT NULL,
   `id_compra` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `art_vendidos`
+--
+
+INSERT INTO `art_vendidos` (`id`, `id_articulo`, `cantidad`, `unidad`, `precio`, `id_compra`) VALUES
+(1, 1, 10, 'PZA', 135.81, 1),
+(2, 5, 10, 'KG', 250, 2),
+(3, 7, 40, 'PZA', 500, 2),
+(4, 8, 5, 'KG', 50, 3),
+(5, 3, 5, 'PZA', 20, 3);
 
 -- --------------------------------------------------------
 
@@ -1283,6 +1295,15 @@ CREATE TABLE `compras` (
   `departamento` varchar(50) NOT NULL,
   `folio` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `compras`
+--
+
+INSERT INTO `compras` (`id`, `fecha`, `total`, `usuario`, `departamento`, `folio`) VALUES
+(1, '2022-12-18 18:13:41', 15000, 'Emanuel', 'Azur Cena', '0101'),
+(2, '2022-12-18 22:57:53', 2000, 'Alejandro', 'Azur Comedor', '2456'),
+(3, '2022-12-18 23:31:53', 3587, 'Emanuel', 'Azur Cena', '0405');
 
 -- --------------------------------------------------------
 
@@ -1424,7 +1445,7 @@ ALTER TABLE `articulos`
 -- AUTO_INCREMENT de la tabla `art_vendidos`
 --
 ALTER TABLE `art_vendidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `catalogo`
@@ -1442,7 +1463,7 @@ ALTER TABLE `ceco`
 -- AUTO_INCREMENT de la tabla `compras`
 --
 ALTER TABLE `compras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `departamentos`
