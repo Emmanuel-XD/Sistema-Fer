@@ -35,10 +35,10 @@ foreach($usuarios as $key => $fila ){
 		<h1>Compras</h1>
     <br>
 		<div>
-            <label for="">Folio</label>
-   <input type="text" class="control">
+    <label for="">Folio</label>
+   <input id="folio" type="text" class="control">
    <label for="">Departamento</label>
-   <input type="text" class="control" readonly value="<?php echo $fila['descripcion']; ?> ">
+   <input id="depto" type="text" class="control" readonly value="<?php echo $fila['descripcion']; ?> ">
    <label for="">Comentarios</label>
    <input type="text" class="control">
     </div>
@@ -116,7 +116,7 @@ foreach($usuarios as $key => $fila ){
   </div>
 </div>
 	<div class="col-sm-6">
-        <table class="table table-striped"  >
+        <table id="tablecont" class="table table-striped"  >
                          <thead>    
                          <tr class="bg-dark" style="color: white;">
                         <th >Id</th>
@@ -125,11 +125,10 @@ foreach($usuarios as $key => $fila ){
                         <th>Cantidad</th>
                         <th>Unidad</th>
                         <th>PrecioUnit</th>
-                        <th>Total   </th>
+                        <th>Total </th>
                         </tr>
                         </thead>
                         <tbody id="formtable">
-
                         </tbody>
         </table>
   </div>
@@ -160,7 +159,7 @@ foreach($usuarios as $key => $fila ){
   <button class="form-control btn btn-danger">Cerrar y cancelar requisición...</button>
       </div>
       <div class="col-sm-3">
-  <button class="form-control btn btn-success">Cerrar y archivar requisición...</button>
+  <button  id="save-btn" class="form-control btn btn-success">Cerrar y archivar requisición...</button>
       </div>
       <div class="col-sm-2">
         

@@ -3,6 +3,7 @@ const searchWrapper = document.querySelector(".search-input");
 const inputBox = searchWrapper.querySelector("input");
 const suggBox = searchWrapper.querySelector(".autocom-box");
 const icon = searchWrapper.querySelector(".icon");
+const saveReq = document.getElementById("save-btn");
 let linkTag = searchWrapper.querySelector("a");
 let webLink;
 let cantsum;
@@ -98,7 +99,6 @@ function showSuggestions(list){
 }
 //add or delete product of the car
 function addCar(id) {
-    console.log(id)
     var article = new FormData()
     article.append('id', id)
     article.append('accion', 'get-article')
@@ -124,14 +124,13 @@ function addCar(id) {
                     document.getElementById(`quantity-mult-${a.id}`).classList.add('lowerNumber')
                     alert('your values cant be lower than 1 or empty, automatically added 1 item')
                     cantsum2 = 1
-                    console.log(`your value = ${cantsum2}`)}
+                    }
                 cantsum = parseFloat(cantsum) + parseFloat(cantsum2);
 
                 inputcant = document.getElementById(`total-${a.id}`)
                 total =   parseFloat(a.precio) * parseFloat(cantsum)
                 document.getElementById(`cant-${a.id}`).value = cantsum;
                 document.getElementById(`cant-${a.id}`).innerHTML = cantsum;
-                console.log(cantsum2)
                 inputcant.innerHTML = total.toFixed(2);
                         
             }
@@ -143,22 +142,20 @@ function addCar(id) {
                 }
                 if(cantsum2 == null || cantsum2 == '' || cantsum2 < 1){ 
                     document.getElementById(`quantity-mult-${a.id}`).classList.add('lowerNumber')
-                    alert('your values cant be lower than 1 or empty, automatically added 1 item')
+                    alert('No se encontro numero de articulos para agregar, se agrego 1 de forma automatica')
                     cantsum2 = 1
-                    console.log(`your value = ${cantsum2}`)}
+                    }
                 //sumcant = parseFloat(cantsum) + parseFloat(cantsum2);
                 total =   parseFloat(a.precio) * parseFloat(cantsum2)
-
-
-            console.log(parseFloat(a.precio))
+                
             result = `
-            <tr id="row-${a.id}">
-            <td>${a.id}</td>
+            <tr class="rowslist" id="row-${a.id}">
+            <td class="prd-id">${a.id}</td>
             <td class="producto-code">${a.codigo}</td>
             <td>${a.descripcion}</td>
-            <td id="cant-${a.id}">${cantsum2}</td>
-            <td>${a.unidad}</td>
-            <td id="unit-${a.id}">${a.precio}</td>
+            <td class="prd-cant" id="cant-${a.id}">${cantsum2}</td>
+            <td class="prd-unit">${a.unidad}</td>
+            <td class="prd-price" id="unit-${a.id}">${a.precio}</td>
             <td class="totals" id="total-${a.id}">${total.toFixed(2)}</td>
           </tr>
           
@@ -187,6 +184,12 @@ function delCar(id){
     if(document.getElementById(`cant-${id}`) && parseInt(document.getElementById(`cant-${id}`).textContent) > 0){
         itemreduce = document.getElementById(`cant-${id}`)
         reducer = document.getElementById(`quantity-mult-${id}`).value
+
+        if(reducer == null || reducer == '' || reducer < 1){ 
+            document.getElementById(`quantity-mult-${id}`).classList.add('lowerNumber')
+            alert('No se encontro numero de articulos para borrar, automaticamente se borro 1 articulo')
+            reducer = 1
+        }
         var reduced = parseFloat(itemreduce.textContent) - parseFloat(reducer)
         var unitVal = parseFloat(document.getElementById(`unit-${id}`).textContent)
         var total = document.getElementById(`total-${id}`)
@@ -200,32 +203,92 @@ function delCar(id){
     }
 }
 //save data on dv
-function dbSaver(){
+$('#tablecont tr').each(function(row, tr){
+    TableData = TableData 
+        + $(tr).find('td:eq(0)').text() + ' '  // Task No.
+        + $(tr).find('td:eq(3)').text() + ' '  // Date
+        + $(tr).find('td:eq(3)').text() + ' '  // Description
+        + $(tr).find('td:eq(4)').text() + ' '  // Task
+        + '\n';
+        console.log("test")
+});
 
+
+
+
+saveReq.addEventListener('click', (a) => { 
+    a.preventDefault
+    var rowList = document.getElementsByClassName("rowslist");
+    var products =  new FormData();
+    Array.from(rowList).forEach(element => {
+  
+    });
+    products.append('folio', document.getElementById('folio').value)
+    products.append('depto', document.getElementById('depto').value)
+    products.append('total', document.getElementById("sumatotal").textContent)
+    var object = {};
+    products.forEach((value, key) => object[key] = value);
+    var json = JSON.stringify(object);
+    console.log(json)
+ })
+
+
+
+
+/* function dbSaver(){
+    $('#tablecont tr').each(function(row, tr){
+        TableData = TableData 
+            + $(tr).find('td:eq(0)').text() + ' '  // Task No.
+            + $(tr).find('td:eq(2)').text() + ' '  // Date
+            + $(tr).find('td:eq(3)').text() + ' '  // Description
+            + $(tr).find('td:eq(4)').text() + ' '  // Task
+            + '\n';
+            console.log("test")
+    });
 }
+function storeData(){
+    var TableData = new Array();
+    
+$('#sampleTbl tr').each(function(row, tr){
+    TableData[row]={
+        "id" : $(tr).find('td:eq(0)').text()
+        , "cant" :$(tr).find('td:eq(2)').text()
+        , "unit" : $(tr).find('td:eq(2)').text()
+        , "price" : $(tr).find('td:eq(3)').text()
+    }
+}); 
+TableData.shift();  // first row is the table header - so remove
+} */
+
+
+
+
+
 function totales(id) {
     ele =  document.getElementsByClassName('totals')
-    console.log(id)
     var totals = 0;
     var sumtot = 0;
-    
         
     Array.from(ele).forEach((el) => {
             sumtot = parseFloat(el.textContent).toFixed(2)
             totalsvalid = parseFloat(totals) + parseFloat(sumtot)
             var validpresu = parseFloat(document.getElementById("top-total").textContent) - totalsvalid;
-            console.log(totals)
             if(validpresu <= 0){
                 alert("Tus  articulos por agregar superan tu presupuesto, el ultimo articulo no fue agregado")
                 document.getElementById(`cant-${id}`).textContent = parseFloat(document.getElementById(`cant-${id}`).textContent) - document.getElementById(`quantity-mult-${id}`).value
                 newtotal = parseFloat(document.getElementById(`unit-${id}`).textContent) * parseFloat(document.getElementById(`cant-${id}`).textContent)
                 document.getElementById(`total-${id}`).textContent = newtotal.toFixed(2)
+                document.getElementById("sumatotal").innerHTML = totals.toFixed(2)
                 if(parseFloat(document.getElementById(`cant-${id}`).textContent) < 1){
                     const element = document.getElementById(`row-${id}`)
                      element.remove()
+                     
                 }
+                
+                
             }
             else{
+        
                 totals = parseFloat(totals) + parseFloat(sumtot);
                 document.getElementById("sumatotal").innerHTML = totals.toFixed(2)
                 /* validpresu = parseFloat(document.getElementById("top-total").textContent) - parseFloat(document.getElementById("sumatotal").textContent) */
@@ -234,11 +297,13 @@ function totales(id) {
             }
            
          })
-
-
-         console.log(totals);
-            
+         if(document.getElementById("formtable").childNodes.length === 2){
+                    
+            document.getElementById("sumatotal").innerHTML = 0;
         }
+
+        }
+
         /* else{
             
             document.getElementById(`cant-${id}`).textContent = parseFloat(document.getElementById(`quantity-mult-${id}`).value) - parseFloat(document.getElementById(`cant-${id}`).textContent)
