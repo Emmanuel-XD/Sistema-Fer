@@ -137,16 +137,6 @@ foreach($usuarios as $key => $fila ){
   </div>
   <br>
   <br>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6">
-  <button class="form-control btn btn-danger"> Cerrar y continuar requisición más tade...</button>
-      </div>
-      <div class="col-sm-6">
-  <button class="form-control btn btn-success">Cerrar y realizar requisición...</button>
-      </div>
-   </div>
-  </div>
   <?php
 
 $sql = "SELECT cat.id, cat.fecha,  cat.monto, cat.porcentaje, c.centro, d.descripcion, u.usuario
@@ -164,6 +154,32 @@ foreach($usuarios as $key => $fila ){
 }
 }
 ?>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+  <button class="form-control btn btn-danger">Cerrar y cancelar requisición...</button>
+      </div>
+      <div class="col-sm-3">
+  <button class="form-control btn btn-success">Cerrar y archivar requisición...</button>
+      </div>
+      <div class="col-sm-2">
+        
+      </div>
+      <div class="col-sm-2">
+          <div class="alert alert-success" role="alert">
+          Limite de compra: <h4 id="top-total"><?php echo $fila['monto']; ?>
+          </h4>
+          MXN
+          </div>
+      </div>
+      <div class="col-sm-2">
+      <div  class="alert alert-dark" role="alert">
+  Total actual:<h4 id="sumatotal">0</h4>MXN
+</div>
+      </div>
+   </div>
+  </div>
+
   <label for="">Requisicion Actual</label>
   <input type="text" class="control" readonly>
   <label for="">Limite de Monto</label>
