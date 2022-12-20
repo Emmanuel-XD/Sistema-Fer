@@ -209,6 +209,7 @@ function delCar(id){
 
 
 saveReq.addEventListener('click', (a) => { 
+    if(confirm("ADVERTENCIA LA COMPRA SE GUARDARA EN EL REGISTRO AUNQUE NO TENGA PRODUCTOS ¿CONTINUAL?")){
     a.preventDefault
     var rowList = document.getElementsByClassName("rowslist");
     var prdId = document.getElementsByClassName("prd-id");
@@ -235,7 +236,7 @@ saveReq.addEventListener('click', (a) => {
     fetch('../includes/guardarReq.php', {
     method: 'POST',
     body: jsonarray}).then( alert("COMPRA GUARDADA, CONSULTA EL HISTORIAL"))
-
+}
  })
  viewHist.addEventListener('click', (a) => {
     a.preventDefault
