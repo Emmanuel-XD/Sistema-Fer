@@ -32,76 +32,23 @@ foreach($usuarios as $key => $fila ){
 
 <div class="container is-fluid">
 <div class="col-xs-12">
-		<h1>Compras</h1>
+		<center><h1>COMPRAS</h1></center>
     <br>
-		<div>
+		<div class="row">
+      <div class="col-sm-2">
     <label for="">Folio</label>
    <input id="folio" type="text" class="control">
+   </div>
+   <div class="col-sm-8">
+
+   </div>
+   <div class="col-sm-2">
    <label for="">Departamento</label>
    <input id="depto" type="text" class="control" readonly value="<?php echo $fila['descripcion']; ?> ">
-   <label for="">Comentarios</label>
-   <input type="text" class="control">
+   </div>
     </div>
     <br> 
- 
-<!--     <div class="modal-buy" id="test">
-        <div class="modal-content-buy">
-            <div class="product-form-buy">
-            <form action="POST" id="formulario">
-                <p>Articulos</p>
-                <label for="">Codigo</label>
-                <input type="text" class="searchbox" name="codigo" id="codigo" required>
-                <label for="quant">Cantidad</label>
-                <input type="number" class="searchbox" name="quant" id="quantity" required>
-                <input type="submit" class="btn btn-outline-secondary" name="buscar" id="buscar" value="BUSCAR">
-              </form>
-            </div>
-        </div>
-   </div> -->
-   <!-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-  Imprimir esta requisicion...
-</button>
-   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <div class=" modal-body">
-                        <div class="modal-footer">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-   </div> -->
-   
-   <!-- Button to Open the Modal -->
-<!--  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
- Buscar Requisicion...
-</button> -->
-  <!--
-<div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
 
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-   
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div> -->
 <div class="container is-fluid">
 <div class="row">
 <div class="wrapper col-sm-6">
@@ -156,10 +103,10 @@ foreach($usuarios as $key => $fila ){
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
-  <button class="form-control btn btn-danger">Cerrar y cancelar requisición...</button>
+  <button id="viewHist" class="form-control btn btn-warning">Ver historial</button>
       </div>
       <div class="col-sm-3">
-  <button  id="save-btn" class="form-control btn btn-success">Cerrar y archivar requisición...</button>
+  <button  id="save-btn" class="form-control btn btn-success">Guardar compra</button>
       </div>
       <div class="col-sm-2">
         
@@ -179,12 +126,10 @@ foreach($usuarios as $key => $fila ){
    </div>
   </div>
 
-  <label for="">Requisicion Actual</label>
-  <input type="text" class="control" readonly>
-  <label for="">Limite de Monto</label>
-  <input type="text" class="control" value="<?php echo '$'.$fila['monto']; ?>" readonly>
-  <label for="">Total Requesiciones</label>
-  <input type="text" class="control" readonly>
+  <input type="hidden" class="control" readonly>
+  <input type="hidden" id="monto" class="hidden control" value="<?php echo $fila['monto']; ?>" readonly>
+  <input type="hidden" class="control" readonly>
+  <input  id="user" type="hidden" class=" control"  value="<?php echo $varsesion?>" readonly>
 
 </body>
 <script src="../js/compras.js"></script>

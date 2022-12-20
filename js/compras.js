@@ -9,6 +9,7 @@ let webLink;
 let cantsum;
 let inputcant;
 let cantsuminp;
+var precio;
 //Search bar & event to add product to the car
 inputBox.addEventListener('input', (e)=>{
     let userData = e.target.value; //user enetered data
@@ -43,6 +44,7 @@ inputBox.addEventListener('input', (e)=>{
         }
         emptyArray = suggestions;
         emptyArray = emptyArray.map((data)=>{
+            precio = data.codigo
             // passing return data inside li tag
             if(data.codigo == undefined){
                 return data = ""
@@ -97,7 +99,6 @@ function showSuggestions(list){
     }
     suggBox.innerHTML = listData;
 }
-//add or delete product of the car
 function addCar(id) {
     var article = new FormData()
     article.append('id', id)
@@ -185,6 +186,7 @@ function delCar(id){
         itemreduce = document.getElementById(`cant-${id}`)
         reducer = document.getElementById(`quantity-mult-${id}`).value
 
+
         if(reducer == null || reducer == '' || reducer < 1){ 
             document.getElementById(`quantity-mult-${id}`).classList.add('lowerNumber')
             alert('No se encontro numero de articulos para borrar, automaticamente se borro 1 articulo')
@@ -202,16 +204,6 @@ function delCar(id){
         totales(id);
     }
 }
-//save data on dv
-$('#tablecont tr').each(function(row, tr){
-    TableData = TableData 
-        + $(tr).find('td:eq(0)').text() + ' '  // Task No.
-        + $(tr).find('td:eq(3)').text() + ' '  // Date
-        + $(tr).find('td:eq(3)').text() + ' '  // Description
-        + $(tr).find('td:eq(4)').text() + ' '  // Task
-        + '\n';
-        console.log("test")
-});
 
 
 
@@ -219,51 +211,38 @@ $('#tablecont tr').each(function(row, tr){
 saveReq.addEventListener('click', (a) => { 
     a.preventDefault
     var rowList = document.getElementsByClassName("rowslist");
+    var prdId = document.getElementsByClassName("prd-id");
+    var rowList = document.getElementsByClassName("rowslist");
+    var text1
+    const arrayex = [
+        [],
+        [],
+        []
+    ]
     var products =  new FormData();
-    Array.from(rowList).forEach(element => {
-  
+    Array.from(prdId).forEach(element => {
+        arrayex[0].push(element.textContent)
+        arrayex[2].push(document.getElementById(`cant-${element.textContent}`).textContent)
     });
-    products.append('folio', document.getElementById('folio').value)
-    products.append('depto', document.getElementById('depto').value)
-    products.append('total', document.getElementById("sumatotal").textContent)
-    var object = {};
-    products.forEach((value, key) => object[key] = value);
-    var json = JSON.stringify(object);
-    console.log(json)
+    console.log(arrayex)
+
+    arrayex[1].push(document.getElementById('folio').value)
+    arrayex[1].push(document.getElementById('depto').value)
+    arrayex[1].push(document.getElementById("sumatotal").textContent)
+    arrayex[1].push(document.getElementById('user').value)
+    arrayex[1].push(document.getElementById('monto').value)
+    jsonarray = JSON.stringify(arrayex)
+    fetch('../includes/guardarReq.php', {
+    method: 'POST',
+    body: jsonarray}).then( alert("COMPRA GUARDADA, CONSULTA EL HISTORIAL"))
+
  })
-
-
-
-
-/* function dbSaver(){
-    $('#tablecont tr').each(function(row, tr){
-        TableData = TableData 
-            + $(tr).find('td:eq(0)').text() + ' '  // Task No.
-            + $(tr).find('td:eq(2)').text() + ' '  // Date
-            + $(tr).find('td:eq(3)').text() + ' '  // Description
-            + $(tr).find('td:eq(4)').text() + ' '  // Task
-            + '\n';
-            console.log("test")
-    });
+ viewHist.addEventListener('click', (a) => {
+    a.preventDefault
+    if(confirm("Tus datos no guardados se perderan ¿Continuar?") === true){
+    window.location.href = 'historial.php'
 }
-function storeData(){
-    var TableData = new Array();
-    
-$('#sampleTbl tr').each(function(row, tr){
-    TableData[row]={
-        "id" : $(tr).find('td:eq(0)').text()
-        , "cant" :$(tr).find('td:eq(2)').text()
-        , "unit" : $(tr).find('td:eq(2)').text()
-        , "price" : $(tr).find('td:eq(3)').text()
-    }
-}); 
-TableData.shift();  // first row is the table header - so remove
-} */
-
-
-
-
-
+ })
 function totales(id) {
     ele =  document.getElementsByClassName('totals')
     var totals = 0;
@@ -273,12 +252,19 @@ function totales(id) {
             sumtot = parseFloat(el.textContent).toFixed(2)
             totalsvalid = parseFloat(totals) + parseFloat(sumtot)
             var validpresu = parseFloat(document.getElementById("top-total").textContent) - totalsvalid;
+
+
             if(validpresu <= 0){
                 alert("Tus  articulos por agregar superan tu presupuesto, el ultimo articulo no fue agregado")
                 document.getElementById(`cant-${id}`).textContent = parseFloat(document.getElementById(`cant-${id}`).textContent) - document.getElementById(`quantity-mult-${id}`).value
                 newtotal = parseFloat(document.getElementById(`unit-${id}`).textContent) * parseFloat(document.getElementById(`cant-${id}`).textContent)
                 document.getElementById(`total-${id}`).textContent = newtotal.toFixed(2)
-                document.getElementById("sumatotal").innerHTML = totals.toFixed(2)
+                var sum = 0;
+                $('.totals').each(function(){
+                    sum += parseFloat(this.textContent);
+                });
+                console.log(sum)
+                document.getElementById("sumatotal").innerHTML = sum;
                 if(parseFloat(document.getElementById(`cant-${id}`).textContent) < 1){
                     const element = document.getElementById(`row-${id}`)
                      element.remove()
@@ -304,11 +290,5 @@ function totales(id) {
 
         }
 
-        /* else{
-            
-            document.getElementById(`cant-${id}`).textContent = parseFloat(document.getElementById(`quantity-mult-${id}`).value) - parseFloat(document.getElementById(`cant-${id}`).textContent)
-           
-        } */
-        
         
            
