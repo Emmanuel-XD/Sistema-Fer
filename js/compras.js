@@ -38,9 +38,7 @@ inputBox.addEventListener('input', (e)=>{
             suggestions = result
             
         icon.onclick = ()=>{
-            webLink = `https://www.google.com/search?q=${userData}`;
-            linkTag.setAttribute("href", webLink);
-            linkTag.click();
+            alert("Funcion aun no implementada, intente más tarde")
         }
         emptyArray = suggestions;
         emptyArray = emptyArray.map((data)=>{
